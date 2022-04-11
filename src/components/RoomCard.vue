@@ -16,24 +16,24 @@
         <p>Please Wait...</p>
       </div>
       <div class="divider">OR</div>
-      <form @submit="onEnterRommID">
+      <form @submit.prevent="joinRoomFromID">
         <div class="room-input">
           <input type="number" min="000000" max="999999" v-model="roomNumber" class="input-group" required>
         </div>
         <div class="btn">
-            <button type="submit" @click="joinRoom">Join Room</button>
+            <button type="submit" >Join Room</button>
         </div>
       </form>
   </div>
 </template>
 
 <script>
-import { createRoom } from "../firebase/app"
+import { createRoom ,ifExists} from "../firebase/app"
 export default {
      data() {
        return {
          isGenerated:false,
-         roomNumber : '',
+         roomNumber : '000000',
          isLoading : false
        }
      },
@@ -51,6 +51,17 @@ export default {
            console.log("joined")
            this.isLoading = false
            this.$router.push("/chatroom/"+this.id)
+       },
+       async joinRoomFromID(){
+            const res = await ifExists(this.roomNumber)
+            if(!res){
+              console.log("Generate room , the given room number not exist")
+            }
+            else{
+            console.log("please wait")
+            this.$router.push("/chatroom/"+this.roomNumber)
+            
+            }
        }
 
 

@@ -26,11 +26,19 @@ export default {
           this.chatList = await data(this.ids)
           console.log("in created",this.chatList)
       },
+      beforeUnmount() {
+         clearInterval(this.intervalid1)  
+      },
+      mounted (){ 
+     
+     this.todo()
+},
       data() {
           return {
               chatList: [],
               input:'',
-              ids:"000000"
+              ids:"000000",
+              intervalid1: ''
           }
       },
       methods: {
@@ -53,6 +61,12 @@ export default {
             //   this.chatList.push(message)
               this.input=''
           },
+
+           todo : function(){ 
+            this.intervalid1 = setInterval(() => {
+                data(this.ids).then( res => this.chatList = res)
+               console.log("in mounted")
+              }, 5000)},
           
       },
       computed:{

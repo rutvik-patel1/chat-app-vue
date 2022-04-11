@@ -1,18 +1,35 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <h3>@{{ name }}</h3>
+  <room-card :id="roomId" @generateRoom="generateRoom"></room-card>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
 
+import RoomCard from "../components/RoomCard.vue"
 export default {
-  name: "Home",
-  components: {
-    HelloWorld,
-  },
-};
+    components:{
+       RoomCard
+    },
+    data() {
+        return {
+            roomId: "000000",
+            
+        }
+    },
+    methods:{
+        generateRoom(){
+            return this.roomId = Math.floor(111111 + Math.random()*888888)
+        },
+        
+    },
+    computed:{
+name(){
+          return localStorage.getItem('uname')   
+        }
+    }
+}
 </script>
+
+<style>
+
+</style>

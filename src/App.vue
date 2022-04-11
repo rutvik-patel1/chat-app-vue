@@ -1,10 +1,22 @@
+
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view />
+  <the-header></the-header>
+  <router-view></router-view>
 </template>
+
+
+<script>
+// @ is an alias to /src
+import TheHeader from "@/components/TheHeader.vue";
+//import ChatArea from "@/components/ChatArea.vue"
+export default {
+  name: "Home",
+  components: {
+    TheHeader,
+  },
+};
+</script>
+
 
 <style>
 #app {
@@ -12,19 +24,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+*{
+  margin: 0;
+  padding:0;
 }
 </style>
+
+
